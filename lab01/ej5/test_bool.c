@@ -1,9 +1,9 @@
 #include <stdio.h>    /* printf()...          */
-#include <stdbool.h>  /* bool, true, false... */
+#include "mybool.h"  /* bool, true, false... */
 #include <stdlib.h>   /* EXIT_SUCCESS... */
 
 int main(void) {
-    bool b1, b2;
+    mybool b1, b2;
     b1 = true;
     b2 = false;
     printf("b1: %d\n", b1);
