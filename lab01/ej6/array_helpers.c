@@ -3,6 +3,7 @@
 #include <stdbool.h>
 #include <assert.h>
 #include <stdio.h>
+#include <stdlib.h>
 void array_swap(int a[], unsigned int i, unsigned int j){
     int x;
     if(i != j){
@@ -24,6 +25,10 @@ unsigned int array_from_file(int array[],
     for (unsigned int i = 0; i < length; i++)
     {
         fscanf(miArchivo, " %i",&array[i]);
+        if(feof(miArchivo)){
+            printf("ERROR!!! \n");
+            exit(EXIT_FAILURE);
+        } 
     }
     fclose(miArchivo);
     for (unsigned int i = 0; i < length/2; i++)

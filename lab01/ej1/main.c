@@ -52,6 +52,10 @@ unsigned int array_from_file(int array[],
     for (unsigned int i = 0; i < length; i++)
     {
         fscanf(archivo,"%i", &array[i]);
+        if(feof(archivo)){
+            printf("ERROR!!! \n");
+            exit(EXIT_FAILURE);
+        }
     }
     fclose(archivo);
     return length;

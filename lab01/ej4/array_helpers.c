@@ -2,6 +2,7 @@
 #include <stdbool.h>
 #include <assert.h>
 #include <stdio.h>
+#include <stdlib.h>
 unsigned int array_from_file(int array[],
            unsigned int max_size,
            const char *filepath) {
@@ -14,6 +15,10 @@ unsigned int array_from_file(int array[],
     for (unsigned int i = 0; i < length; i++)
     {
         fscanf(miArchivo, " %i",&array[i]);
+        if(feof(miArchivo)){
+            printf("ERROR!!! \n");
+            exit(EXIT_FAILURE);
+        }  
     }
     fclose(miArchivo);
     return length;

@@ -35,7 +35,11 @@ unsigned int array_from_file(int array[],
     assert(length <= max_size);
     for (unsigned int i = 0; i < length; i++)
     {
-        fscanf(archivo,"%i", &array[i]);            //Donde pongo el coso del EOF??
+        fscanf(archivo,"%i", &array[i]);     
+        if(feof(archivo)){
+            printf("ERROR!!! \n");
+            exit(EXIT_FAILURE);
+        }   
     }
     fclose(archivo);
     return length;
