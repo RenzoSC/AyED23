@@ -9,7 +9,7 @@ unsigned int fstring_length(fixstring s) {
     {
         i++;
     }
-    
+    return i;
 }
 
 bool fstring_eq(fixstring s1, fixstring s2) {
