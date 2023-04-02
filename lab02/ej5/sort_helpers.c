@@ -12,6 +12,7 @@ void swap(fixstring a[], unsigned int i, unsigned int j) {
      * COMPLETAR
      *
      */
+    
 }
 
 bool goes_before(fixstring x, fixstring y) {
