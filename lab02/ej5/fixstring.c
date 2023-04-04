@@ -62,10 +62,9 @@ void fstring_set(fixstring s1, const fixstring s2) {
 
 void fstring_swap(fixstring s1,  fixstring s2) {
     fixstring aux;
-    /*
-     * COMPLETAR
-     *
-     */
+    fstring_set(aux, s1);
+    fstring_set(s1,s2);
+    fstring_set(s2, aux);
 }
 
 
