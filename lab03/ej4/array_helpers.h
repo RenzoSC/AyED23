@@ -9,7 +9,7 @@
 #include "weather.h"
 
 #define FST_YEAR 1980
-#define LST_YEAR 2016
+#define LST_YEAR 2016 
 #define YEARS 37
 
 typedef enum {january, february, march, april, may, june, july, august, september, october, november, december} month_t;

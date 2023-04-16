@@ -57,8 +57,24 @@ void array_from_file(WeatherTable array, const char *filepath) {
             fprintf(stderr, "Invalid array.\n");
             exit(EXIT_FAILURE);
         }
+        if ((k_year -FST_YEAR) >= YEARS)
+        {
+            fprintf(stderr, "Invalid input for the value of year, the value should be between 1980-2016\n");
+            exit(EXIT_FAILURE);
+        }
+        if ((k_month-1u)>=12)
+        {
+            fprintf(stderr, "Invalid input for the value of month, the value should be between 1-12\n");
+            exit(EXIT_FAILURE);
+        }
+        if ((k_day-1u)>=28)
+        {
+            fprintf(stderr, "Invalid input for the value of day, the value should be between 1-28\n");
+            exit(EXIT_FAILURE);
+        }
         Weather weather = weather_from_file(file);
-        /* Completar acá: Guardar la medición de clima en el arreglo multidimensional */
+        
+        array[k_year - FST_YEAR][k_month -1][k_day -1] = weather;
     }
     fclose(file);
 }
