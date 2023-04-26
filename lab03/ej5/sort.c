@@ -12,7 +12,7 @@
 #include "player.h"
 
 bool goes_before(player_t x, player_t y){
-    return x.rank < y.rank;
+    return x.rank <= y.rank;
 }
 
 bool array_is_sorted(player_t atp[], unsigned int length) {
