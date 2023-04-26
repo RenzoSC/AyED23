@@ -79,3 +79,13 @@ void sort(player_t a[], unsigned int length) {
     
     quick_sort(a, length);
 }
+
+/* ¿Funciona más rápido la versión con punteros? ¿Por qué son más eficientes los intercambios con esta
+versión?
+
+creo que funciona más rápido porque sabemos en que lugar de la memoria estan los datos que necesitamos
+y no tenemos que recorrer mas de un player para encontrar el que buscamos 
+
+La última línea de la función main() antes del return llama a destroy() ¿Por qué? ¿Qué ocurriría
+si esa línea no estuviera ahí? 
+si no estuviera ahi se podrían presentar memory leaks*/
