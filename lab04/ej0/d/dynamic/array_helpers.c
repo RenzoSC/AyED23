@@ -6,7 +6,7 @@
 
 
 void array_dump(int a[], size_t length) {
-    fprintf(stdout, "length: %u\n", length);
+    fprintf(stdout, "length: %lu\n", length);    //cambie %u por %lu
     fprintf(stdout, "[ ");
     for (size_t i = 0u; i < length; ++i) {
         fprintf(stdout, "%d", a[i]);
@@ -34,11 +34,12 @@ int * array_from_file(const char *filepath, size_t *length) {
         exit(EXIT_FAILURE);
     }
     int *array=NULL;
-    //
-    // COMPLETAR: - Reservar memoria para array
-    //            - Cambiar el valor de *length para que contenga el tamaño del
-    //              arreglo.
-    //
+    
+
+    array = malloc(sizeof(int) * size);   //reserva memoria para un arreglo de x enteros
+    *length = size;     //guarda en *length el valor de size
+
+
     if (size > 0 && array == NULL) {
         fprintf(stderr, "Not enough memory\n");
         exit(EXIT_FAILURE);

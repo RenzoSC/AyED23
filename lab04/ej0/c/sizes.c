@@ -19,8 +19,12 @@ int main(void) {
     printf("name-size  : %lu bytes\n"
            "age-size   : %lu bytes\n"
            "height-size: %lu bytes\n"
-           "data_t-size: %lu bytes\n", /* Completar */);
+           "data_t-size: %lu bytes\n", sizeof(messi.name), sizeof(messi.age), sizeof(messi.height), sizeof(messi));
 
     return EXIT_SUCCESS;
 }
 
+/*
+a) la suma no coincide con le total por dos bits
+b) el tamaño de name depende del tamaño máximo que se le de al arreglo de la estructura data_t.name que tenga en total
+*/
