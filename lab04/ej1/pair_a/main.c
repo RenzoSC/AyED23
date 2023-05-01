@@ -14,7 +14,9 @@ int main(void) {
     p = pair_new(3, 4);
     // Se muestra el par por pantalla
     printf("p = ");
+
     show_pair(p);
+    
     // Nuevo para q con elementos de p intercambiados
     q = pair_swapped(p);
     // Se muestra q
