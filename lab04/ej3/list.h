@@ -35,5 +35,5 @@ list copy(list l);
 
 /*DESTROY: */
 
-void destroy(list l);
+list destroy(list l);
 #endif
