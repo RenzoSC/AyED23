@@ -6,7 +6,6 @@ struct _s_stack
 {
   stack_elem elem;
   struct _s_stack *next;
-  unsigned int size;
 };
 
 stack stack_empty(){
@@ -17,8 +16,7 @@ stack stack_empty(){
 stack stack_push(stack s, stack_elem e){
     stack p = malloc(sizeof(struct _s_stack));
     p->elem = e;
-    p->next = s;
-    p->size = s ==NULL? 1: s->size +1;                         
+    p->next = s;                         
     s = p;
     return s;
 }
@@ -32,7 +30,15 @@ stack stack_pop(stack s){
 }
 
 unsigned int stack_size(stack s){
-  return s == NULL ? 0 : s->size;
+  unsigned int len =0;
+  stack p;
+  p = s;
+  while (p!=NULL)
+  {
+      len+=1;
+      p = p->next;
+  }
+  return len;
 }
 
 stack_elem stack_top(stack s){
@@ -73,3 +79,8 @@ stack stack_destroy(stack s){
   s=NULL;
   return s;
 }
+
+/*
+No hay cambios en la inv?? ya que siempre me fijo en el size y no presenta
+mucho cambio agregarle una variable más a la estructura que nos diga el size
+*/
