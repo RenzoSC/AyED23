@@ -9,9 +9,9 @@ struct _s_stack
   unsigned int size;
 };
 
-static bool inv_repre (stack s){
-    return (s != NULL ? s->size >0 && s->elem != NULL: true);  //NO SE SI ESTA BIEN ESTA INVREP preguntar al profe
-}
+// static bool inv_repre (stack s){
+//     return (s != NULL ? s->size >0 && s->elem != NULL: true);  //NO SE SI ESTA BIEN ESTA INVREP preguntar al profe
+// }
 
 stack stack_empty(){
   stack s = NULL;

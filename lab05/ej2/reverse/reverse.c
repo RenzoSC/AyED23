@@ -71,6 +71,9 @@ int main(int argc, char *argv[]) {
   
   printf("Reversed: ");
   array_dump(new_array, length);
+  free(new_array);   //libero el array
   stack_destroy(st);
   return (EXIT_SUCCESS);
 }
+
+//NO MEMORY LEAKS, CHECKED WITH valgrind --leak-check=full ./reverse ./input/example-easy.in

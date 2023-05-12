@@ -8,9 +8,9 @@ struct _s_stack
   struct _s_stack *next;
 };
 
-static bool inv_repre (stack s){
-    return (s != NULL ? s->elem != NULL : true);  //NO SE SI ESTA BIEN ESTA INVREP preguntar al profe
-}
+// static bool inv_repre (stack s){
+//     return (s != NULL ? s->elem != NULL : true);  //NO SE SI ESTA BIEN ESTA INVREP preguntar al profe
+// }
 
 stack stack_empty(){
   stack s = NULL;
