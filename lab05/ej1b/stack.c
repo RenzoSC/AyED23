@@ -6,7 +6,12 @@ struct _s_stack
 {
   stack_elem elem;
   struct _s_stack *next;
+  unsigned int size;
 };
+
+static bool inv_repre (stack s){
+    return (s != NULL ? s->size >0 && s->elem != NULL: true);  //NO SE SI ESTA BIEN ESTA INVREP preguntar al profe
+}
 
 stack stack_empty(){
   stack s = NULL;
@@ -16,7 +21,8 @@ stack stack_empty(){
 stack stack_push(stack s, stack_elem e){
     stack p = malloc(sizeof(struct _s_stack));
     p->elem = e;
-    p->next = s;                         
+    p->next = s;
+    p->size = s ==NULL? 1: s->size +1;                         
     s = p;
     return s;
 }
@@ -30,15 +36,7 @@ stack stack_pop(stack s){
 }
 
 unsigned int stack_size(stack s){
-  unsigned int len =0;
-  stack p;
-  p = s;
-  while (p!=NULL)
-  {
-      len+=1;
-      p = p->next;
-  }
-  return len;
+  return s == NULL ? 0 : s->size;
 }
 
 stack_elem stack_top(stack s){
@@ -80,7 +78,3 @@ stack stack_destroy(stack s){
   return s;
 }
 
-/*
-No hay cambios en la inv?? ya que siempre me fijo en el size y no presenta
-mucho cambio agregarle una variable más a la estructura que nos diga el size
-*/

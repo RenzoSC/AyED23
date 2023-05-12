@@ -6,8 +6,11 @@ struct _s_stack
 {
   stack_elem elem;
   struct _s_stack *next;
-  unsigned int size;
 };
+
+static bool inv_repre (stack s){
+    return (s != NULL ? s->elem != NULL : true);  //NO SE SI ESTA BIEN ESTA INVREP preguntar al profe
+}
 
 stack stack_empty(){
   stack s = NULL;
@@ -17,8 +20,7 @@ stack stack_empty(){
 stack stack_push(stack s, stack_elem e){
     stack p = malloc(sizeof(struct _s_stack));
     p->elem = e;
-    p->next = s;
-    p->size = s ==NULL? 1: s->size +1;                         
+    p->next = s;                         
     s = p;
     return s;
 }
@@ -32,7 +34,15 @@ stack stack_pop(stack s){
 }
 
 unsigned int stack_size(stack s){
-  return s == NULL ? 0 : s->size;
+  unsigned int len =0;
+  stack p;
+  p = s;
+  while (p!=NULL)
+  {
+      len+=1;
+      p = p->next;
+  }
+  return len;
 }
 
 stack_elem stack_top(stack s){
