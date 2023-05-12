@@ -35,7 +35,7 @@ char *parse_filepath(int argc, char *argv[]) {
 float average(list l) {
     float resultado;
     int suma = 0, tam = length(l);
-    printf("\nlong : %d\n", tam);
+    
     list l0 = copy(l); //Copio la lista l en l0
     while (!is_empty(l0)){ // Sumo los elementos de l0 y voy eliminando el primer elemento asi avanzo
         suma += head(l0);

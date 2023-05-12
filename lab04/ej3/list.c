@@ -8,12 +8,12 @@ struct Node
 };
 
 list empty(){
-    list q =malloc(sizeof(struct Node));   //PROBLEMS HERE
-    return q;
+    list l = NULL;
+    return l;
 }
 
 list addl(list_elem elem, list lista){
-    list p = empty();
+    list p = malloc(sizeof(struct Node));
     p->elem = elem;
     p->next = lista;                         
     lista = p;
@@ -34,7 +34,7 @@ list destroy(list l){
 
 
 bool is_empty(list l){
-    return (l == NULL);                        //PROBLEMS HERE TOO
+    return (l == NULL);                        
 }
 
 list_elem head(list l){
@@ -52,7 +52,7 @@ list tail(list l){
 
 list addr(list_elem elem, list l){
     list p, q;
-    q = empty();
+    q = malloc(sizeof(struct Node));
     q->elem = elem;
     q->next = NULL;
     if (!is_empty(l))
