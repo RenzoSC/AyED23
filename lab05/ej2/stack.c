@@ -14,9 +14,9 @@ static bool inv_repre (stack s){
 }
 
 stack stack_empty(){
-    stack s = malloc(sizeof(struct _s_stack));
-    s->elems = malloc(sizeof(stack_elem));
-    s -> size = 0u;
+    stack s = malloc(sizeof(struct _s_stack));     //LO HAGO DE ESTA FORMA PARA QUE FUNCIONE
+    s->elems = malloc(sizeof(stack_elem));         // EN EL EJ 3 DEL HANOI
+    s -> size = 0u;                                // NO GENERA MEMLEAKS EN NIGUNO DE LOS EJ
     s->capacity = 1u;
 
     return s;
