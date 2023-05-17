@@ -3,18 +3,18 @@
 #include <string.h>
 
 char *string_clone(const char *str, size_t length) {
-    char clone[length + 1];
-    char *output=clone;
+    char *clone = NULL;
+    clone = malloc((length + 1) * sizeof(char));
     for (size_t i=0; i<length; i++) {
         clone[i] = str[i];
     }
     clone[length] = '\0';
-    return output;
+    return clone;
 }
 
 
 int main(void) {
-    char *original=""
+    char original[]=""
          "______ time ago in a galaxy far, far away...\n\n\n"
          "         _______..___________.     ___      .______             \n"
          "        /       ||           |    /   \\     |   _  \\          \n"
@@ -44,7 +44,7 @@ int main(void) {
          "galaxy...\n";
     char *copy=NULL;
 
-    copy = string_clone(original, sizeof(original)/sizeof(char) - 1);
+    copy = string_clone(original, sizeof(original) - 1);
     printf("Original: %s\n", original);
     copy[0] = 'A';
     copy[1] = ' ';
@@ -54,7 +54,7 @@ int main(void) {
     copy[5] = 'g';
     printf("Copia   : %s\n", copy);
 
-
+    free(copy);
 
     return EXIT_SUCCESS;
 }

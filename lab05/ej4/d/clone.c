@@ -5,7 +5,8 @@
 
 char *string_clone(const char *str) {
     char *clone=NULL;
-    /* COMPLETAR */
+    clone = malloc( (strlen(str) +1u) * sizeof(char) );
+    strcpy(clone, str);
     return clone;
 }
 
