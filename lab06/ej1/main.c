@@ -100,5 +100,86 @@ int main(int argc, char *argv[]) {
      * Al salir debe liberarse toda la memoria utilizada.
      *
      */
+
+    abb user_tree= abb_empty();
+    bool flag= true;
+    int entry;
+    while (flag)
+    {  
+        printf("\n\nPor favor, ingrese cual de las siguientes operaciones desea realizar (numero):\n\n");
+        printf("1 ........ Mostrar árbol por pantalla\n2 ........ Agregar un elemento\n3 ........ Eliminar un elemento\n4 ........ Chequear existencia de elemento\n5 ........ Mostrar longitud del árbol\n6 ........ Mostrar raiz, máximo y mínimo del árbol\n7 ........ Salir\n\n");
+        scanf("%d", &entry);
+        abb_elem num_toadd;
+        abb_elem num_tocheck;
+        abb_elem num_todel;
+        switch (entry) {
+            case 1:
+                printf("\nElegiste la opción de mostrar el arbol por pantalla\n");
+                if (abb_is_empty(user_tree))
+                {
+                    printf("\nArbol vacio\n");
+                }else{
+                    abb_dump(user_tree);
+                }
+                
+                break;
+            case 2:
+                
+                printf("\nElegiste la opción de agregar un elemento");
+                printf("\nIngresa el numero para añadir:");
+                scanf("%d", &num_toadd);
+                user_tree = abb_add(user_tree, num_toadd);
+                break;
+            case 3:
+                
+                printf("\nElegiste la opción de eliminar un elemento");
+                printf("\nIngresa el numero para eliminar:");
+                scanf("%d", &num_todel);
+                if (abb_exists(user_tree, num_todel))
+                {
+                    user_tree = abb_remove(user_tree, num_todel);
+                    printf("\nElemento eliminado con exito");
+                }else{
+                    printf("\nEl elemento dado no existe dentro del arbol");
+                }
+                break;
+            case 4:
+                
+                printf("\nElegiste la opción de chequear existencia de elemento\n");
+                printf("\nIngresa el numero para chequear:");
+                scanf("%d", &num_tocheck);
+                if (abb_exists(user_tree, num_todel))
+                {
+                    printf("\nEl elemento dado existe dentro del arbol");
+                }else{
+                    printf("\nEl elemento dado no existe dentro del arbol");
+                }
+                break;
+            case 5:
+                printf("\nElegiste la opción de mostrar la longitud del árboln");
+                printf("\nLa longitud del arbol es: %u\n", abb_length(user_tree));
+                break;
+            case 6:
+                printf("\nElegiste la opción de mostrar raiz, máximo y mínimo del árbol\n");
+                if (!abb_is_empty(user_tree)) {
+                    printf("\nraiz: %d\n minimo: %d\n maximo: %d\n", abb_root(user_tree),
+                                                                abb_min(user_tree),
+                                                                abb_max(user_tree));
+                } else {
+                    printf("\nÁrbol vacío\n");
+                }
+                break;
+            case 7:
+                printf("\nElegiste la opción para salir\n");
+                user_tree = abb_destroy(user_tree);
+                return (EXIT_SUCCESS);
+                break;
+            default:
+                printf("\nOpción no válida\n");
+            }
+    }
     return (EXIT_SUCCESS);
 }
+
+
+//NO MEM-LEAKS CHECKED WITH VALGRIND
