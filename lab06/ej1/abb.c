@@ -241,8 +241,9 @@ abb_elem abb_min(abb tree) {
 void abb_dump(abb tree) {
     assert(invrep(tree));
     if (tree != NULL) {
+        printf("%d ", tree->elem);    //para el ejc lo unico q hice fue cambiar la posicion del printf
         abb_dump(tree->left);
-        printf("%d ", tree->elem);
+        //printf("%d ", tree->elem);
         abb_dump(tree->right);
     }
 }
