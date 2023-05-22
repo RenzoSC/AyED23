@@ -11,9 +11,9 @@ struct _s_string {
 string string_create(const char *word) {
     string str = NULL;
     str = calloc(1, sizeof(struct _s_string));
-    str->length = /* needs implementation */;
-    str->content = calloc(/* needs implementation */, sizeof(char));
-    str->content = strncpy(str->content, word, str->length + 1);
+    str->length = strlen(word);
+    str->content = calloc(str->length, sizeof(char));
+    str->content = strncpy(str->content, word, str->length);
     return (str);
 }
 
@@ -22,8 +22,8 @@ unsigned int string_length(string str) {
 }
 
 bool string_less(const string str1, const string str2) {
-    /* needs implementation */
-    return false;
+    int val = strcmp(str1->content, str2->content);
+    return val <0;
 }
 
 bool string_eq(const string str1, const string str2) {
