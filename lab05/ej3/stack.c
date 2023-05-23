@@ -1,7 +1,6 @@
 #include <stdlib.h>
 #include <assert.h>
 #include "stack.h"
-#include <stdio.h>
 
 struct _s_stack {
     stack_elem *elems;      // Arreglo de elementos
@@ -9,81 +8,73 @@ struct _s_stack {
     unsigned int capacity;  // Capacidad actual del arreglo elems
 };
 
-static bool inv_repre (stack s){
-    return (s != NULL ? ((s->size <= s->capacity) && (s->elems != NULL) && (s->capacity >0)) : true);
-}
 
 stack stack_empty(){
-    stack s = malloc(sizeof(struct _s_stack));
-    s->elems = malloc(sizeof(stack_elem));
-    s -> size = 0u;
-    s->capacity = 1u;
-
+    stack s =NULL;
+    s = malloc(sizeof(struct _s_stack));
+    s->size = 0u;
+    s->capacity = 0u;
+    s->elems = NULL;
     return s;
-}
-
-stack stack_push(stack s, stack_elem e){
-    assert(inv_repre(s));
-    s->size++;
-    if (s->size > s->capacity) {
-        s->capacity *= 2;
-        s->elems = realloc(s->elems, sizeof(stack_elem) * s->capacity);
     }
-    s->elems[s->size-1] = e;
-    assert(inv_repre(s));
+stack stack_push(stack s,stack_elem e){
+    if (s->size == s->capacity){
+        if (s->capacity == 0)
+        {
+            s->capacity = 50;
+            s->elems = calloc(s->capacity,sizeof(stack_elem));
+            s->elems[s->size] = e;
+            s->size = s->size +1u;
+        }
+        s->elems = realloc(s->elems,s->capacity*2);
+        s->elems[s->size]=e;
+        s->size = s->size +1u;
+    }else if (s->size < s->capacity)
+    {
+        s->elems[s->size] = e;
+        s->size = s->size +1u;
+    }
+    
     return s;
 }
 
 stack stack_pop(stack s){
-    assert(inv_repre(s)&& (s != NULL));
-    s->size -=1;
-    assert(inv_repre(s)&& (s != NULL));
+    assert(!stack_is_empty(s));
+    s->size = s->size-1;
     return s;
 }
 
 unsigned int stack_size(stack s){
-    assert(inv_repre(s));
-    return (s == NULL ? 0u : s->size);
+    return s->size;
 }
 
 stack_elem stack_top(stack s){
-    assert(inv_repre(s)&& (s != NULL));
-    return s->elems[s->size -1u];
+    assert(!stack_is_empty(s));
+    return s->elems[s->size-1];
 }
 
 bool stack_is_empty(stack s){
-    return s->size == 0;
+    return(s->size == 0);
 }
 
 stack_elem *stack_to_array(stack s){
-    assert(inv_repre(s));
-    stack_elem *s_array = calloc(stack_size(s), sizeof(stack_elem));
-    if (!stack_is_empty(s))
+    stack_elem *array = NULL;
+    if (s->size == 0)
     {
-        for (size_t i = stack_size(s); i >0; i--)
-        {
-        s_array[i-1] = s->elems[i-1];
-        }
-    }else{
-        s_array = NULL;
+        return NULL;
     }
-    assert(inv_repre(s));
-    return s_array;
+    array = calloc(s->size,sizeof(stack_elem));
+    for (unsigned int i = 0u; i < s->size; i++)
+    {
+        array[i] = s->elems[i];
+    }
+    return array;
 }
 
-stack stack_destroy(stack s){
-    assert(inv_repre(s));
-    if (s == NULL){
-    
-        fprintf(stderr, "Cannot destroy stack\n");
-        exit(EXIT_FAILURE);
-    }
-
+stack stack_destroy(stack s) {
     free(s->elems);
-    s->elems = NULL;
     free(s);
-    s = NULL;
-    assert(inv_repre(s));
     return s;
-    
 }
+
+//NO MEAMLEAKS

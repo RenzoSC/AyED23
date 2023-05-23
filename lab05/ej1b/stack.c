@@ -2,79 +2,100 @@
 #include <assert.h>
 #include "stack.h"
  
-struct _s_stack
+struct node
 {
-  stack_elem elem;
-  struct _s_stack *next;
-  unsigned int size;
+    stack_elem elem;
+    struct node *next;
+};
+struct _s_stack{
+    struct node * stack;
+    unsigned int size;
 };
 
-// static bool inv_repre (stack s){
-//     return (s != NULL ? s->size >0 && s->elem != NULL: true);  //NO SE SI ESTA BIEN ESTA INVREP preguntar al profe
-// }
-
+/*
+invariante:
+cada elemento del stack, en el campo stack_len, tendra
+la cantidad de elementos que hay desde el mismo hacia el final.
+*/
 stack stack_empty(){
-  stack s = NULL;
-  return s;
-}
-
-stack stack_push(stack s, stack_elem e){
-    stack p = malloc(sizeof(struct _s_stack));
-    p->elem = e;
-    p->next = s;
-    p->size = s ==NULL? 1: s->size +1;                         
-    s = p;
+    stack s = NULL;
+    s = malloc(sizeof(struct _s_stack));
+    s->stack = NULL;
+    s->size = 0;
     return s;
 }
 
+
+stack stack_push(stack s, stack_elem e){
+    struct node *aux = NULL;
+    aux = malloc(sizeof(struct node));
+    aux->elem = e;
+    aux->next = s->stack ;
+    s->stack = aux ;
+    s->size = s->size+1;
+    return s;
+}
+
+
 stack stack_pop(stack s){
-  assert(!stack_is_empty(s));
-  stack s2 = s;
-  s = s->next;
-  free(s2);
-  return s;
+    assert(!stack_is_empty(s));
+     struct node *p = NULL;
+    p = s->stack;
+    s->stack = (s->stack)->next;
+    s->size = s->size-1;
+    p->next = NULL;
+    free(p);
+    p=NULL;
+    return s;
 }
 
 unsigned int stack_size(stack s){
-  return s == NULL ? 0 : s->size;
-}
-
-stack_elem stack_top(stack s){
-  assert(stack_size(s)>0);
-  return s->elem;
+    return s->size;
 }
 
 bool stack_is_empty(stack s){
-  return s == NULL;
+    return (s->size==0 && s->stack ==NULL);
 }
+
+stack_elem stack_top (stack s){
+    assert(!stack_is_empty(s));
+    stack_elem e = 0;
+    e = (s->stack)->elem;
+    return e ;
+}
+
+
 
 stack_elem *stack_to_array(stack s){
-  stack_elem *s_array = calloc(stack_size(s), sizeof(stack_elem));
-  stack p = s;
-  if (!stack_is_empty(s))
-  {
-    for (size_t i = stack_size(s); i >0; i--)
+    stack_elem * array = NULL;
+    if (stack_is_empty(s))
     {
-      s_array[i-1] = stack_top(p);
-      p = p -> next;
+        return NULL;
     }
-  }else{
-    s_array = NULL;
-  }
-  
-  return s_array;
+    array = calloc(stack_size(s),sizeof(stack_elem));
+    struct node * p = NULL;
+    p = s->stack;
+    for (unsigned int i = 0; i < stack_size(s); i++)
+    {
+        array[(stack_size(s)-1)-i] = p->elem;
+        p = p->next;
+    }
+    return array;
 }
+
 
 stack stack_destroy(stack s){
-  stack s2 = NULL;
-  s2=s;
-  while (s!=NULL)
-  {
-      s = s->next;
-      free(s2);
-      s2 = s;
-  }
-  s=NULL;
-  return s;
+    struct node* p = NULL;
+    p = s->stack;
+    while (s->stack != NULL)
+    {
+        s->stack = s->stack->next;
+        p->next = NULL;
+        free(p);
+        p = s->stack;
+    }
+    free(s);
+    return s;
 }
 
+//NO MEAMLEAKS
