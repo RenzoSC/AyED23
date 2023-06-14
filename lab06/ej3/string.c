@@ -3,17 +3,17 @@
 #include <string.h>
 #include "string.h"
 
-struct _s_string {
+struct _string_t {
     char *content;
     unsigned int length;
 };
 
 string string_create(const char *word) {
     string str = NULL;
-    str = calloc(1, sizeof(struct _s_string));
+    str = calloc(1, sizeof(struct _string_t));
     str->length = strlen(word);
-    str->content = calloc(str->length, sizeof(char));
-    str->content = strncpy(str->content, word, str->length);
+    str->content = calloc(str->length + 1, sizeof(char));
+    str->content = strncpy(str->content, word, str->length + 1);
     return (str);
 }
 
@@ -22,8 +22,8 @@ unsigned int string_length(string str) {
 }
 
 bool string_less(const string str1, const string str2) {
-    int val = strcmp(str1->content, str2->content);
-    return val <0;
+    int cmp = strcmp(str1->content, str2->content);
+    return (cmp < 0);
 }
 
 bool string_eq(const string str1, const string str2) {

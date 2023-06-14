@@ -171,33 +171,38 @@ int main(void) {
     /* print a simple menu and do the requested operations */
     do {
         option = print_menu();
+        if (!is_valid_option(option))
+        {
+            break;
+        }
+        
         switch (option) {
             case ADD:
-
+                current = on_add(current);
                 break;
             case REMOVE:
-
+                current = on_remove(current);
                 break;
             case REPLACE:
-
+                current = on_replace(current);
                 break;
             case DUMP:
-
+                on_dump(current);
                 break;
             case EMPTY:
-
+                current = on_empty(current);
                 break;
             case LOAD:
-
+                current = on_load(current);
                 break;
             case SEARCH:
-
+                on_search(current);
                 break;
             case SHOW:
-
+                dict_dump(current, stdout);
                 break;
             case SIZE:
-
+                on_size(current);
                 break;
             case QUIT:
                 current = dict_destroy(current);

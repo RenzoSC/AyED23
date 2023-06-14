@@ -4,10 +4,10 @@
 #include <stdbool.h>
 #include <stdio.h>
 
-typedef struct _s_string* string;
+typedef struct _string_t* string;
 
 /* Creates a new string copying the characters
- * of the given [word].
+ * of the given [word]. 
  */
 string string_create(const char *word);
 
@@ -23,7 +23,7 @@ bool string_less(string str1, string str2);
 /* Returns true if [str1] is equal to [str2], or false otherwise. */
 bool string_eq(string str1, string str2);
 
-/* Retuns a clone of the string [str] */
+/* Returns a clone of the string [str] */
 string string_clone(string str);
 
 /* Destroys the string, freeing all the allocated resources */

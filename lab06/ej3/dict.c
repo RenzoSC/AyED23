@@ -18,16 +18,16 @@ static bool is_dict_abb(dict_t dic){
         return true;
     }else if (dic->right == NULL && dic->left!= NULL)
     {
-        return is_abb(dic->left);
+        return is_dict_abb(dic->left);
     }else if (dic->right != NULL && dic->left== NULL)
     {
-        return is_abb(dic->right);
+        return is_dict_abb(dic->right);
     }else
     {
         bool is_more = !key_less(dic->right->key,dic->key);
         bool is_less = key_less(dic->left->key,dic->key);
-        bool der = is_abb(dic->right);
-        bool izq = is_abb(dic->left);
+        bool der = is_dict_abb(dic->right);
+        bool izq = is_dict_abb(dic->left);
         return(is_less && is_more && der && izq);
     }
 }
@@ -117,7 +117,7 @@ bool dict_exists(dict_t dict, key_t word) {
     {
         return true;
     }
-    return false;
+    return exists;
 }
 
 unsigned int dict_length(dict_t dict) {
@@ -218,7 +218,8 @@ dict_t dict_remove(dict_t dict, key_t word) {
 }
 
 dict_t dict_remove_all(dict_t dict) {
-    /* needs implementation */
+    dict = dict_destroy(dict);
+    dict = dict_empty();
     return dict;
 }
 
@@ -226,9 +227,9 @@ void dict_dump(dict_t dict, FILE *file) {
     assert(invrep(dict));
     if (dict != NULL) {
         //key_dump(dict->key,file);  
-        abb_dump(dict->left);
+        dict_dump(dict->left, file);
         key_dump(dict->key,file);
-        abb_dump(dict->right);
+        dict_dump(dict->right, file);
     }
 }
 
@@ -239,8 +240,8 @@ dict_t dict_destroy(dict_t dict) {
     }
     dict->key = key_destroy(dict->key);
     dict->value = value_destroy(dict->value);
-    dict->left=abb_destroy(dict->left);
-    dict->right= abb_destroy(dict->right);
+    dict->left=dict_destroy(dict->left);
+    dict->right= dict_destroy(dict->right);
     free(dict);
     dict=NULL;
     assert(dict == NULL);
